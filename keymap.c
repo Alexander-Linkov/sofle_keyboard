@@ -5,6 +5,7 @@
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
+    _JCUKEN,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -39,6 +40,9 @@ enum custom_keycodes {
     LI_GRAVE, // `
 };
 
+#define KC_QWERTY PDF(_QWERTY)
+#define KC_JCUKEN PDF(_JCUKEN)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY
@@ -57,12 +61,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_QWERTY] = LAYOUT(
-  KC_ESC,          KC_1,  KC_2,  KC_3,        KC_4, KC_5,                           KC_6,  KC_7,  KC_8,    KC_9,   KC_0,    TG(1),
-  LGUI_T(KC_RBRC), KC_Q,  KC_W,  KC_E,        KC_R, KC_T,                           KC_Y,  KC_U,  KC_I,    KC_O,   KC_P,    RGUI_T(KC_LBRC),
-  LCTL_T(KC_GRV),  KC_A,  KC_S,  KC_D,        KC_F, KC_G,                           KC_H,  KC_J,  KC_K,    KC_L,   KC_SCLN, RCTL_T(KC_QUOT),
-  LALT_T(KC_BSLS), KC_Z,  KC_X,  KC_C,        KC_V, KC_B,   KC_MUTE,       KC_MPLY, KC_N,  KC_M,  KC_COMM, KC_DOT, KC_SLSH, RALT_T(KC_MINS),
-           LGUI(KC_SPC),KC_DEL,LT(2, KC_TAB), LSFT_T(KC_SPC), LT(1, KC_ENT), LT(1, KC_ESC),  RSFT_T(KC_BSPC), LT(2, KC_DEL), KC_NO, KC_NO
+  KC_ESC,          KC_1,      KC_2,   KC_3,          KC_4,           KC_5,                     KC_6,          KC_7,            KC_8,          KC_9,   KC_0,    TG(1),
+  LGUI_T(KC_RBRC), KC_Q,      KC_W,   KC_E,          KC_R,           KC_T,                     KC_Y,          KC_U,            KC_I,          KC_O,   KC_P,    RGUI_T(KC_LBRC),
+  LCTL_T(KC_GRV),  KC_A,      KC_S,   KC_D,          KC_F,           KC_G,                     KC_H,          KC_J,            KC_K,          KC_L,   KC_SCLN, RCTL_T(KC_QUOT),
+  LALT_T(KC_BSLS), KC_Z,      KC_X,   KC_C,          KC_V,           KC_B,   KC_MUTE, KC_MPLY, KC_N,          KC_M,            KC_COMM,       KC_DOT, KC_SLSH, RALT_T(KC_MINS),
+                   KC_JCUKEN, KC_DEL, LT(2, KC_TAB), LSFT_T(KC_SPC), LT(1, KC_ENT),            LT(1, KC_ESC), RSFT_T(KC_BSPC), LT(2, KC_DEL), KC_NO,  KC_NO
 ),
+
+/*
+ * ЙЦУКЕН
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  Esc |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |TGLOWR|
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |GUI/Ъ |   Й  |   Ц  |   У  |   К  |   Е  |                    |   Н  |   Г  |   Ш  |   Щ  |   З  |RGUI/Х|
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |LCtr/Ё|   Ф  |   Ы  |   В  |   А  |   П  |-------.    ,-------|   Р  |   О  |   Л  |   Д  |   Ж  |RCtr/Э|
+ * |------+------+------+------+------+------|  MUTE |    | Play  |------+------+------+------+------+------|
+ * |LAlt/\|   Я  |   Ч  |   С  |   М  |   И  |-------|    |-------|   Т  |   Ь  |   Б  |   Ю  |   /  |RAlt/-|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            | Switch | Del | LOWER | LShift| /RAISE  /       \RAISE \  |RShift | LOWER |      |      |
+ *            |language|     |  Tab  | Space |/ Enter /         \ Esc  \ | Bspc  | Del   |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+
+ [_JCUKEN] = LAYOUT( 
+    KC_ESC,                          KC_1,                    KC_2,                    KC_3,                    KC_4,                    KC_5,                                      KC_6,                    KC_7,                    KC_8,                    KC_9,                    KC_0,                    TG(1),  
+    LGUI_T(UP(0x044A, 0x042A)/*ъ*/), UP(0x0439, 0x0419)/*й*/, UP(0x0446, 0x0426)/*ц*/, UP(0x0443, 0x0423)/*у*/, UP(0x043A, 0x041A)/*к*/, UP(0x0435, 0x0415)/*е*/,                   UP(0x043D, 0x041D)/*н*/, UP(0x0433, 0x0413)/*г*/, UP(0x0448, 0x0428)/*ш*/, UP(0x0449, 0x0429)/*щ*/, UP(0x0437, 0x0417)/*з*/, RGUI_T(UP(0x0445, 0x0425)/*х*/),  
+    LCTL_T(UP(0x0451, 0x0401)/*ё*/), UP(0x0444, 0x0424)/*ф*/, UP(0x044B, 0x042B)/*ы*/, UP(0x0432, 0x0412)/*в*/, UP(0x0430, 0x0410)/*а*/, UP(0x043F, 0x041F)/*п*/,                   UP(0x0440, 0x0420)/*р*/, UP(0x043E, 0x041E)/*о*/, UP(0x043B, 0x041B)/*л*/, UP(0x0434, 0x0414)/*д*/, UP(0x0436, 0x0416)/*ж*/, RCTL_T(UP(0x044D, 0x042D)/*э*/),  
+    LALT_T(KC_BSLS),                 UP(0x044F, 0x042F)/*я*/, UP(0x0447, 0x0427)/*ч*/, UP(0x0441, 0x0421)/*с*/, UP(0x043C, 0x041C)/*м*/, UP(0x0438, 0x0418)/*и*/, KC_MUTE, KC_MPLY, UP(0x0442, 0x0422)/*т*/, UP(0x044C, 0x042C)/*ь*/, UP(0x0431, 0x0411)/*б*/, UP(0x044E, 0x042E)/*ю*/, KC_SLSH, RALT_T(KC_MINS),  
+                                     KC_QWERTY,               KC_DEL,                  LT(2, KC_TAB),           LSFT_T(KC_SPC),          LT(1, KC_ENT),                             LT(1, KC_ESC),           RSFT_T(KC_BSPC),         LT(2, KC_DEL),           KC_NO,                   KC_NO  
+ ),
 
 /*
  * LOWER
@@ -76,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |LAlt/\|   \  |   /  |   =  |   -  |   <  |-------|    |-------|   >  |   1  |   2  |   3  |   0  |RAlt/-|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *            | Switch |      | LOWER |LShift| /RAISE /       \RAISE \  |RShift| LOWER |  .  |  ,  |
- *            |Language|     | Tab   |Space |/ Enter/         \ Esc  \ | Bspc | Del   |     |     |
+ *            |Language|      | Tab   |Space |/ Enter/         \ Esc  \ | Bspc | Del   |     |     |
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
@@ -109,6 +137,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 _______, _______, _______, _______, _______,       _______, _______, _______, KC_NO, KC_PSCR
 )
 };
+/* ADJUST
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |QWERTY|COLEMAK|      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |MACWIN|      |      |      |-------.    ,-------|      |      |      |      |      |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            |      |      |      |      | /       /       \      \  |      |      |      |      |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+ [_ADJUST] = LAYOUT(
+    XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX , XXXXXXX,KC_QWERTY,KC_COLEMAK,CG_TOGG,XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX , XXXXXXX,CG_TOGG, XXXXXXX,    XXXXXXX,  XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                     _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
+    )
+  };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
