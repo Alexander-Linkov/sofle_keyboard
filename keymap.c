@@ -95,28 +95,6 @@ enum custom_keycodes {
     KC_NXTWD, // next word
     KC_LSTRT, // home
     KC_LEND,  // end
-    LI_COMMA, // ,
-    LI_DOT,   // .
-    LI_QUES,  // ?
-    LI_QUOT,  // '
-    LI_DQUO,  // "
-    LI_COLN,  // :
-    LI_SCLN,  // ;
-    LI_LBRC,  // [
-    LI_RBRC,  // ]
-    LI_LCBR,  // {
-    LI_RCBR,  // }
-    LI_BSLS,  // backslash
-    LI_SLSH,  // forward slash
-    LI_LT,    // <
-    LI_GT,    // >
-    LI_CIRC,  // ^
-    LI_AT,    // @
-    LI_AMPR,  // &
-    LI_HASH,  // #
-    LI_DLR,   // $
-    LI_TILD,  // ~
-    LI_GRAVE, // `
 };
 
 #define KC_QWERTY PDF(_QWERTY)
@@ -241,11 +219,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
-  _______, UC(0x007E), UC(0x0060),   KC_NO,   KC_NO,   UC(0x007B),                       LI_RBRC,   KC_PAST, KC_PSLS, KC_NO, KC_NUM, _______,
-  _______, UP(APOSTROPHE, L_PPOINT_DOUBLE_ANGLE_QUOTE), UP(QUOTE, R_PPOINT_DOUBLE_ANGLE_QUOTE), LI_COLN, LI_SCLN,  LI_LCBR, LI_RCBR, KC_P7,   KC_P8,   KC_P9, KC_PPLS, _______,
-  _______, KC_EXLM, LI_QUES, LI_DOT,  LI_COMMA, KC_LPRN,                       KC_RPRN, KC_P4,   KC_P5,   KC_P6, KC_PMNS, _______,
-  _______, LI_BSLS, LI_SLSH, KC_EQL,  KC_MINS,  LI_LT,   KC_BTN1,       KC_BTN2, LI_GT, KC_P1,   KC_P2,   KC_P3, KC_P0, _______,
-                    _______, _______, _______, _______, _______,       _______, _______, _______, KC_PDOT, KC_PCMM
+  _______, UC(0x007E),                                  UC(0x0060),                             KC_NO,      KC_NO,      UC(0x007B),                         UC(0x007D), KC_PAST,    KC_PSLS, KC_NO,  KC_NUM,  _______,
+  _______, UP(APOSTROPHE, L_PPOINT_DOUBLE_ANGLE_QUOTE), UP(QUOTE, R_PPOINT_DOUBLE_ANGLE_QUOTE), UC(0x003A), UC(0x003B), UC(0x005B),                         UC(0x005D), KC_P7,      KC_P8,   KC_P9,  KC_PPLS, _______,
+  _______, KC_EXLM,                                     UC(0x003F),                             UC(0x002E), UC(0x002C), KC_LPRN,                            KC_RPRN,    KC_P4,      KC_P5,   KC_P6,  KC_PMNS, _______,
+  _______, UC(0x005C),                                  UC(0x002F),                             KC_EQL,     KC_MINS,    UC(0x003C), KC_BTN1,    KC_BTN2,    UC(0x003E), KC_P1,      KC_P2,   KC_P3,  KC_P0,   _______,
+                                                        _______,                                _______,    _______,    _______,    _______,    _______,    _______,    _______,    KC_PDOT, KC_PCMM
 ),
 /*
  * RAISE
@@ -368,229 +346,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
-        case LI_COMMA:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P4);
-                tap_code(KC_P4);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_DOT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P4);
-                tap_code(KC_P6);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_QUES:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P6);
-                tap_code(KC_P3);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_QUOT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P3);
-                tap_code(KC_P9);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_DQUO:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P3);
-                tap_code(KC_P4);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_COLN:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P5);
-                tap_code(KC_P8);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_SCLN:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P5);
-                tap_code(KC_P9);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_LBRC:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P9);
-                tap_code(KC_P1);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_RBRC:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P9);
-                tap_code(KC_P3);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_LCBR:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P1);
-                tap_code(KC_P2);
-                tap_code(KC_P3);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_RCBR:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P1);
-                tap_code(KC_P2);
-                tap_code(KC_P5);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_BSLS:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P9);
-                tap_code(KC_P2);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_SLSH:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P4);
-                tap_code(KC_P7);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_LT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P6);
-                tap_code(KC_P0);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_GT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P6);
-                tap_code(KC_P2);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_CIRC:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P9);
-                tap_code(KC_P4);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_AT:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P6);
-                tap_code(KC_P4);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_AMPR:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P3);
-                tap_code(KC_P8);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_HASH:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P3);
-                tap_code(KC_P5);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_DLR:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P3);
-                tap_code(KC_P6);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_TILD:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P1);
-                tap_code(KC_P2);
-                tap_code(KC_P6);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
-        case LI_GRAVE:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LALT));
-                tap_code(KC_P9);
-                tap_code(KC_P6);
-                unregister_mods(mod_config(MOD_LALT));
-            } else {
-                //release the key
-            }
-            break;
     }
     return true;
 };
@@ -607,33 +362,43 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 #ifdef OLED_ENABLE
 static void render_status(void) {
+    oled_write_P(PSTR("\n"), false);
     switch (get_highest_layer(layer_state|default_layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("ENG\n"), false);
+            oled_write_ln_P(PSTR("ENG"), false);
             break;
         case _JCUKEN:
-            oled_write_P(PSTR("RUS\n"), false);
-            break;
-        case _LOWER:
-            oled_write_P(PSTR("Lower\n"), false);
-            break;
-        case _RAISE:
-            oled_write_P(PSTR("Raise\n"), false);
-            break;
-        case _ADJUST:
-            oled_write_P(PSTR("Adjust\n"), false);
+            oled_write_ln_P(PSTR("RUS"), false);
             break;
         default:
-            // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undefined"), false);
+            oled_write_P(PSTR("Mod\n"), false);
+            break;
     }
+    oled_write_P(PSTR("\n"), false);
+    switch (get_highest_layer(layer_state)) {
+        case 0:
+        case 1:
+            oled_write_P(PSTR("Base\n"), false);
+            break;
+        case 2:
+            oled_write_P(PSTR("Lower"), false);
+            break;
+        case 3:
+            oled_write_P(PSTR("Raise"), false);
+            break;
+        case 4:
+            oled_write_P(PSTR("Adjust"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Undef"), false);
+    }
+    oled_write_P(PSTR("\n\n"), false);
 
     // Host Keyboard LED Status
-    led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.num_lock ? PSTR("NUM:ON\n") : PSTR("NUM:OFF\n"), false);
-    oled_write_P(led_state.caps_lock ? PSTR("CAPS:ON\n") : PSTR("CAPS:OFF\n"), false);
-    oled_write_P(led_state.scroll_lock ? PSTR("SCR:ON\n") : PSTR("SCR:OFF\n"), false);
-
+    led_t led_usb_state = host_keyboard_led_state();
+    oled_write_ln_P(PSTR("NMLCK"), led_usb_state.num_lock);
+    oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+    oled_write_P(PSTR("\n"), false);
     switch (get_unicode_input_mode()) {
         case UNICODE_MODE_WINCOMPOSE:
             oled_write_P(PSTR("WIN\n"), false);
@@ -646,7 +411,7 @@ static void render_status(void) {
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undef OS\n"), false);
+            oled_write_ln_P(PSTR("UndOS\n"), false);
     }
 }
 
@@ -665,7 +430,7 @@ bool oled_task_user(void) {
         render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         render_logo();  // Renders a static logo
-        oled_scroll_left();  // Turns on scrolling
+        //oled_scroll_left();  // Turns on scrolling
     }
     
     return false;
