@@ -44,10 +44,30 @@ enum unicode_map {
     RU_SOFT_SIGN_L, RU_SOFT_SIGN_U,  // Ь, Ь
     RU_B_L,         RU_B_U,          // Б, Б
     RU_YU_L,        RU_YU_U,          // Ю, Ю
-    APOSTROPHE,                  // '
+    APOSTROPHE,                   // '
     QUOTE,                        // "
     L_PPOINT_DOUBLE_ANGLE_QUOTE,  // «
     R_PPOINT_DOUBLE_ANGLE_QUOTE,  // »
+    TILDA,                        // ~
+    GRAVE,                        // `
+    L_CRLBRACE,                   // {
+    R_CRLBRACE,                   // }
+    COLON,                        // :
+    S_COLON,                      // ;
+    L_SQRBRACK,                   // [
+    R_SQRBRACK,                   // ]
+    QSTMRK,                       // ?
+    DOT,                          // .
+    COMMA,                        // ,
+    BCK_SLASH,                    // \ '
+    SLASH,                        // /
+    LT,                           // <
+    GT,                           // >
+    HAT,                          // ^
+    AT,                           // @
+    AMP,                          // &
+    HASH,                         // #
+    USDLR                         // $
 };
 
 const uint32_t unicode_map[] = {
@@ -86,8 +106,29 @@ const uint32_t unicode_map[] = {
     [RU_YU_L]        = 0x044E, [RU_YU_U]        = 0x042E,
     [APOSTROPHE]  = 0x0027,                  // '
     [QUOTE] = 0x0022,                        // "
+    [R_PPOINT_DOUBLE_ANGLE_QUOTE]  = 0x00BB, // »
     [L_PPOINT_DOUBLE_ANGLE_QUOTE]  = 0x00AB, // «
-    [R_PPOINT_DOUBLE_ANGLE_QUOTE]  = 0x00BB, // 
+    [TILDA] = 0x007E,                        // ~
+    [GRAVE] = 0x0060,                        // `
+    [L_CRLBRACE] = 0x007B,                   // {
+    [R_CRLBRACE] = 0x007D,                   // }
+    [COLON] = 0x003A,                        // :
+    [S_COLON] = 0x003B,                      // ;
+    [L_SQRBRACK] = 0x005B,                   // [
+    [R_SQRBRACK] = 0x005D,                   // ]
+    [QSTMRK] = 0x003F,                       // ?
+    [DOT] = 0x002E,                          // .
+    [COMMA] = 0x002C,                        // ,
+    [BCK_SLASH] = 0x005C,                    // \ '
+    [SLASH] = 0x002F,                        // /
+    [LT] = 0x003C,                           // <
+    [GT] = 0x003E,                           // >
+    [HAT] = 0x005E,                          // ^
+    [AT] = 0x0040,                           // @
+    [AMP] = 0x0026,                          // &
+    [HASH] = 0x0023,                         // #
+    [USDLR] = 0x0024                         // $
+
 };
 
 enum custom_keycodes {
@@ -219,11 +260,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT(
-  _______, UC(0x007E),                                  UC(0x0060),                             KC_NO,      KC_NO,      UC(0x007B),                      UC(0x007D), KC_PAST, KC_PSLS, KC_CALC, KC_NUM,  _______,
-  _______, UP(APOSTROPHE, L_PPOINT_DOUBLE_ANGLE_QUOTE), UP(QUOTE, R_PPOINT_DOUBLE_ANGLE_QUOTE), UC(0x003A), UC(0x003B), UC(0x005B),                      UC(0x005D), KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______,
-  _______, KC_EXLM,                                     UC(0x003F),                             UC(0x002E), UC(0x002C), KC_LPRN,                         KC_RPRN,    KC_P4,   KC_P5,   KC_P6,   KC_PMNS, _______,
-  _______, UC(0x005C),                                  UC(0x002F),                             KC_EQL,     KC_MINS,    UC(0x003C), KC_BTN1,    KC_BTN2, UC(0x003E), KC_P1,   KC_P2,   KC_P3,   KC_P0,   _______,
-                                                        _______,                                _______,    _______,    _______,    _______,    _______, _______,    _______, KC_PDOT, KC_PCMM
+  _______, UM(TILDA),                                   UM(GRAVE),                              KC_NO,      KC_NO,       UM(L_CRLBRACE),                      UM(R_CRLBRACE), KC_PAST, KC_PSLS, KC_CALC, KC_NUM,  _______,
+  _______, UP(APOSTROPHE, L_PPOINT_DOUBLE_ANGLE_QUOTE), UP(QUOTE, R_PPOINT_DOUBLE_ANGLE_QUOTE), UM(COLON),  UM(S_COLON), UM(L_SQRBRACK),                      UM(R_SQRBRACK), KC_P7,   KC_P8,   KC_P9,   KC_PPLS, _______,
+  _______, KC_EXLM,                                     UM(QSTMRK),                             UM(DOT),    UM(COMMA),   KC_LPRN,                             KC_RPRN,        KC_P4,   KC_P5,   KC_P6,   KC_PMNS, _______,
+  _______, UM(BCK_SLASH),                               UM(SLASH),                              KC_EQL,     KC_MINS,     UM(LT),         KC_BTN1,    KC_BTN2, UM(GT),         KC_P1,   KC_P2,   KC_P3,   KC_P0,   _______,
+                                                        _______,                                _______,    _______,     _______,        _______,    _______, _______,        _______, KC_PDOT, KC_PCMM
 ),
 /*
  * RAISE
@@ -241,11 +282,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
-  _______, KC_F1,      KC_F2 ,     KC_F3 ,     KC_F4 ,     KC_F5,                        KC_F6,   KC_F7 ,   KC_F8,   KC_F9,    KC_F10,     KC_F11,
-  _______, KC_INS,     KC_ASTR,    UC(0x005E), KC_PERC,    KC_APP,                       KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, C(KC_BSPC), KC_F12,
-  _______, UC(0x0040), UC(0x0026), UC(0x0023), UC(0x0024), KC_CAPS,                      KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  KC_DEL,     KC_PSCR,
-  _______, C(KC_Z),    C(KC_X),    C(KC_C),    C(KC_V),    C(KC_B), KC_BTN1,    KC_BTN2, KC_NO,   KC_LSTRT, KC_NO,   KC_LEND,  KC_NO,    UC_NEXT,
-                       _______,    _______,    _______,    _______, _______,    _______, _______, _______, _______, _______
+  _______, KC_F1,   KC_F2 ,  KC_F3 ,   KC_F4 ,    KC_F5,                        KC_F6,   KC_F7 ,   KC_F8,   KC_F9,    KC_F10,     KC_F11,
+  _______, KC_INS,  KC_ASTR, UM(HAT),  KC_PERC,   KC_APP,                       KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, C(KC_BSPC), KC_F12,
+  _______, UM(AT),  UM(AMP), UM(HASH), UM(USDLR), KC_CAPS,                      KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  KC_DEL,     KC_PSCR,
+  _______, C(KC_Z), C(KC_X), C(KC_C),  C(KC_V),   C(KC_B), KC_BTN1,    KC_BTN2, KC_NO,   KC_LSTRT, KC_NO,   KC_LEND,  KC_NO,    UC_NEXT,
+                    _______, _______,  _______,   _______, _______,    _______, _______, _______,  _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
