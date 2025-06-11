@@ -274,7 +274,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case KC_PRVWD:
             if (record->event.pressed) {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     register_mods(mod_config(MOD_LALT));
                     register_code(KC_LEFT);
                 } else {
@@ -282,7 +282,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     register_code(KC_LEFT);
                 }
             } else {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     unregister_mods(mod_config(MOD_LALT));
                     unregister_code(KC_LEFT);
                 } else {
@@ -293,7 +293,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_NXTWD:
              if (record->event.pressed) {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     register_mods(mod_config(MOD_LALT));
                     register_code(KC_RIGHT);
                 } else {
@@ -301,7 +301,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     register_code(KC_RIGHT);
                 }
             } else {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     unregister_mods(mod_config(MOD_LALT));
                     unregister_code(KC_RIGHT);
                 } else {
@@ -312,7 +312,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_LSTRT:
             if (record->event.pressed) {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                      //CMD-arrow on Mac, but we have CTL and GUI swapped
                     register_mods(mod_config(MOD_LCTL));
                     register_code(KC_LEFT);
@@ -320,7 +320,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     register_code(KC_HOME);
                 }
             } else {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     unregister_mods(mod_config(MOD_LCTL));
                     unregister_code(KC_LEFT);
                 } else {
@@ -330,7 +330,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_LEND:
             if (record->event.pressed) {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     //CMD-arrow on Mac, but we have CTL and GUI swapped
                     register_mods(mod_config(MOD_LCTL));
                     register_code(KC_RIGHT);
@@ -338,7 +338,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     register_code(KC_END);
                 }
             } else {
-                if (keymap_config.swap_lctl_lgui) {
+                if (get_unicode_input_mode()==UNICODE_MODE_MACOS) {
                     unregister_mods(mod_config(MOD_LCTL));
                     unregister_code(KC_RIGHT);
                 } else {
