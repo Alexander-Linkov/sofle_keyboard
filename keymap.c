@@ -5,9 +5,10 @@
 enum sofle_layers {
     _QWERTY, // default layer for ENG
     _JCUKEN, // default layer for RUS
+    _QWERTY_MODS, // temp switching for short cuts does not work with default layers
     _LOWER,
     _RAISE,
-    _QWERTY_MODS, // temp switching for short cuts does not work with default layers
+    _ADJUST,
 };
 
 enum unicode_map {
@@ -165,11 +166,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   
 [_QWERTY] = LAYOUT(
-  KC_JCUKEN, KC_1, KC_2,    KC_3,    KC_4,          KC_5,                                         KC_6,            KC_7,          KC_8,    KC_9,    KC_0,    TG(2),
+  KC_JCUKEN, KC_1, KC_2,    KC_3,    KC_4,          KC_5,                                         KC_6,            KC_7,          KC_8,    KC_9,    KC_0,    TG(3),
   KC_RBRC,   KC_Q, KC_W,    KC_E,    KC_R,          KC_T,                                         KC_Y,            KC_U,          KC_I,    KC_O,    KC_P,    KC_LBRC,
   KC_GRV,    KC_A, KC_S,    KC_D,    KC_F,          KC_G,                                         KC_H,            KC_J,          KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LALT,   KC_Z, KC_X,    KC_C,    KC_V,          KC_B,           KC_MUTE,       KC_MPLY,       KC_N,            KC_M,          KC_COMM, KC_DOT,  KC_SLSH, KC_RALT,
-                   KC_LGUI, KC_LCTL, LT(3, KC_TAB), LSFT_T(KC_SPC), LT(2, KC_ENT), LT(2, KC_ESC), RSFT_T(KC_BSPC), LT(3, KC_DEL), KC_RCTL, KC_RGUI
+                   KC_LGUI, KC_LCTL, LT(4, KC_TAB), LSFT_T(KC_SPC), LT(3, KC_ENT), LT(3, KC_ESC), RSFT_T(KC_BSPC), LT(4, KC_DEL), KC_RCTL, KC_RGUI
 ),
 
 /*
@@ -200,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_8,
     KC_9,
     KC_0,
-    TG(2),
+    TG(3),
     UP(RU_HARD_SIGN_L, RU_HARD_SIGN_U), //second row
     UP(RU_YI_L, RU_YI_U),
     UP(RU_TS_L, RU_TS_U),
@@ -240,16 +241,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     CK_RALT,  
     CK_LGUI,                                // fifth row
     CK_LCTRL,
-    LT(3, KC_TAB),
+    LT(4, KC_TAB),
     LSFT_T(KC_SPC),
-    LT(2, KC_ENT),
-    LT(2, KC_ESC),
+    LT(3, KC_ENT),
+    LT(3, KC_ESC),
     RSFT_T(KC_BSPC),
-    LT(3, KC_DEL),
+    LT(4, KC_DEL),
     CK_RCTRL,
     CK_RGUI  
 ),
-
+[_QWERTY_MODS] = LAYOUT(
+  KC_JCUKEN, KC_1, KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,   KC_0,    TG(2),
+  KC_RBRC,   KC_Q, KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC,
+  KC_GRV,    KC_A, KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
+  _______,   KC_Z, KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE, KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, _______,
+                   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
 /*
  * LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -288,19 +295,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_RAISE] = LAYOUT(
-  KC_ESC, KC_F1,   KC_F2 ,  KC_F3 ,   KC_F4 ,         KC_F5,                        KC_F6,   KC_F7 ,   KC_F8,   KC_F9,    KC_F10,     KC_F11,
-  _______, KC_INS,  KC_ASTR, UM(HAT),  KC_PERC,       KC_APP,                       KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, C(KC_BSPC), KC_F12,
-  _______, UM(AT),  UM(AMP), UM(HASH), UM(USDLR),     KC_CAPS,                      KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  KC_DEL,     KC_PSCR,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,       XXXXXXX, KC_BTN1,    KC_BTN2, KC_NO,   KC_LSTRT, KC_NO,   KC_LEND,  KC_NO,    UC_NEXT,
-                    KC_LGUI, KC_LCTL,  LT(3, KC_TAB), LSFT_T(KC_SPC), LT(2, KC_ENT), LT(2, KC_ESC), RSFT_T(KC_BSPC), LT(3, KC_DEL), KC_RCTL, KC_RGUI
+  KC_ESC, KC_F1,   KC_F2 ,  KC_F3 ,   KC_F4 ,     KC_F5,                     KC_F6,   KC_F7 ,   KC_F8,   KC_F9,    KC_F10,     KC_F11,
+  _______, KC_INS,  KC_ASTR, UM(HAT),  KC_PERC,   KC_APP,                    KC_PGUP, KC_PRVWD, KC_UP,   KC_NXTWD, C(KC_BSPC), KC_F12,
+  _______, UM(AT),  UM(AMP), UM(HASH), UM(USDLR), KC_CAPS,                   KC_PGDN, KC_LEFT,  KC_DOWN, KC_RGHT,  KC_DEL,     KC_PSCR,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX, KC_BTN1, KC_BTN2, KC_NO,   KC_LSTRT, KC_NO,   KC_LEND,  XXXXXXX,    _______,
+                    _______, _______,  _______,   _______, _______, _______, _______, _______,  _______, _______
 ),
-[_QWERTY_MODS] = LAYOUT(
-  KC_JCUKEN, KC_1, KC_2,    KC_3,    KC_4,          KC_5,                                         KC_6,            KC_7,           KC_8,     KC_9,    KC_0,    TG(2),
-  KC_RBRC,   KC_Q, KC_W,    KC_E,    KC_R,          KC_T,                                         KC_Y,            KC_U,           KC_I,     KC_O,    KC_P,    KC_LBRC,
-  KC_GRV,    KC_A, KC_S,    KC_D,    KC_F,          KC_G,                                         KC_H,            KC_J,           KC_K,     KC_L,    KC_SCLN, KC_QUOT,
-  _______,   KC_Z, KC_X,    KC_C,    KC_V,          KC_B,           KC_MUTE,       KC_MPLY,       KC_N,            KC_M,           KC_COMM,  KC_DOT,  KC_SLSH, _______,
-                   KC_LGUI, KC_LCTL, LT(3, KC_TAB), LSFT_T(KC_SPC), LT(2, KC_ENT), LT(2, KC_ESC), RSFT_T(KC_BSPC), LT(3, KC_DEL), KC_RCTL, KC_RGUI
-)
+/*
+ * ADJUST
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      | Win  |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      | Mac  |-------.    ,-------|      |      |      |      |      |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |Linux |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *           |      |       |       |      | /      /       \      \  |      |       |       |      |
+ *           |      |       |       |      |/      /         \      \ |      |       |       |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+[_ADJUST] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, UC_WINC,                   _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, UC_MAC,                    _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, UC_LINX, _______, _______, _______, _______, _______, _______, _______, _______,
+                    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -426,28 +448,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case CK_RGUI:
             if (record->event.pressed) {
-                slayer_on(_QWERTY_MODS);
+                layer_on(_QWERTY_MODS);
                 register_mods(mod_config(MOD_RGUI));
             } else {
                 unregister_mods(mod_config(MOD_RGUI));
-                layer_off(_QWERTY_MODS);
-            }
-            break;
-        case KC_LALT:
-            if (record->event.pressed) {
-                layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_LALT));
-            } else {
-                unregister_mods(mod_config(MOD_LALT));
-                layer_off(_QWERTY_MODS);
-            }
-            break;
-        case KC_RALT:
-            if (record->event.pressed) {
-                layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_RALT));
-            } else {
-                unregister_mods(mod_config(MOD_RALT));
                 layer_off(_QWERTY_MODS);
             }
             break;
@@ -459,9 +463,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)  },
     [1] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)  },
-    [2] =   { ENCODER_CCW_CW(MS_WHLD, MS_WHLU),  ENCODER_CCW_CW(MS_WHLL, MS_WHLR)  },
-    [3] =   { ENCODER_CCW_CW(KC_MS_L, KC_MS_R),  ENCODER_CCW_CW(KC_MS_U, KC_MS_D)  },
-    [4] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)  },
+    [2] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)  },
+    [3] =   { ENCODER_CCW_CW(MS_WHLD, MS_WHLU),  ENCODER_CCW_CW(MS_WHLL, MS_WHLR)  },
+    [4] =   { ENCODER_CCW_CW(KC_MS_L, KC_MS_R),  ENCODER_CCW_CW(KC_MS_U, KC_MS_D)  },
+    [5] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU),  ENCODER_CCW_CW(KC_MPRV, KC_MNXT)  },
 };
 #endif
 
@@ -486,13 +491,16 @@ static void render_status(void) {
             oled_write_ln_P(PSTR("Base"), false);
             break;
         case 2:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_ln_P(PSTR(" "), false);
             break;
         case 3:
-            oled_write_P(PSTR("Raise"), false);
+            oled_write_P(PSTR("Lower"), false);
             break;
         case 4:
-            oled_write_ln_P(PSTR("CTRL"), false);
+            oled_write_P(PSTR("Raise"), false);
+            break;
+        case 5:
+            oled_write_ln_P(PSTR("Adj"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
@@ -518,6 +526,10 @@ static void render_status(void) {
             // Or use the write_ln shortcut over adding '\n' to the end of your string
             oled_write_ln_P(PSTR("UndOS"), false);
     }
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
 static void render_logo(void) {
