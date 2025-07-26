@@ -56,8 +56,7 @@ This layout uses [QMK Unicode](https://docs.qmk.fm/features/unicode) for symbol 
   - **Swap Control and Command keys** for proper modifier behavior:
     - Go to **System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys**
     - Select your keyboard in the dropdown
-    - Swap:
-      - `Control` ⟷ `Command`
+    - Swap: `Control` ⟷ `Command`
 - **Linux**: Most distributions with **IBus** support Unicode input by default.
 
 ## Language Switching
