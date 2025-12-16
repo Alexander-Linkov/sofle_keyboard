@@ -411,54 +411,62 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CK_LCTRL:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_LCTL));
+                register_mods(MOD_LCTL);
             } else {
-                unregister_mods(mod_config(MOD_LCTL));
+                unregister_mods(MOD_LCTL);
                 layer_off(_QWERTY_MODS);
             }
             break;
         case CK_RCTRL:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_RCTL));
+                register_mods(MOD_RCTL);
             } else {
-                unregister_mods(mod_config(MOD_RCTL));
+                unregister_mods(MOD_RCTL);
                 layer_off(_QWERTY_MODS);
             }
             break;
         case CK_LALT:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_LALT));
+                register_mods(MOD_LALT);
             } else {
-                unregister_mods(mod_config(MOD_LALT));
+                unregister_mods(MOD_LALT);
                 layer_off(_QWERTY_MODS);
             }
             break;
         case CK_RALT:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_RALT));
+                if (get_unicode_input_mode()==UNICODE_MODE_WINCOMPOSE) {
+                    register_mods(MOD_LALT);
+                } else {
+                    register_mods(MOD_RALT);
+                }
             } else {
-                unregister_mods(mod_config(MOD_RALT));
+                if (get_unicode_input_mode()==UNICODE_MODE_WINCOMPOSE) {
+                    unregister_mods(MOD_LALT);
+                } else {
+                    unregister_mods(MOD_RALT);
+                }
                 layer_off(_QWERTY_MODS);
             }
             break;
         case CK_LGUI:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_LGUI));
+                register_mods(MOD_LGUI);
             } else {
-                unregister_mods(mod_config(MOD_LGUI));
+                unregister_mods(MOD_LGUI);
                 layer_off(_QWERTY_MODS);          
             }
             break;
         case CK_RGUI:
             if (record->event.pressed) {
                 layer_on(_QWERTY_MODS);
-                register_mods(mod_config(MOD_RGUI));
+                register_mods(MOD_RGUI);
             } else {
-                unregister_mods(mod_config(MOD_RGUI));
+                unregister_mods(MOD_RGUI);
                 layer_off(_QWERTY_MODS);
             }
             break;
